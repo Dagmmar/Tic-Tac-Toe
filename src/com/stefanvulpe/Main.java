@@ -10,13 +10,14 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("layout.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 800, 800));
 
         Image icon = new Image("file:src/icons/icon.png");
         primaryStage.getIcons().add(icon);
+
 
         primaryStage.setResizable(false);
         primaryStage.show();
@@ -26,4 +27,5 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 }

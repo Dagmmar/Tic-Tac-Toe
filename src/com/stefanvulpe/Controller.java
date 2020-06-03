@@ -6,15 +6,23 @@ import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
+
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class Controller {
@@ -44,10 +52,23 @@ public class Controller {
     private Line line;
 
     @FXML
+    private Hyperlink hyperlink;
+
+    @FXML
+    private ImageView imageView;
+
+    @FXML
+    private Label info;
+
+    @FXML
     public void initialize() {
         gameBoard.setAlignment(Pos.CENTER);
 
         line.setVisible(false);
+
+        gameBoard.setOnMouseEntered(mouseEvent -> {
+            gameBoard.setCursor(Cursor.HAND);
+        });
 
         button.setOnMouseClicked(mouseEvent -> {
             ObservableList<Node> panes = gameBoard.getChildren();
@@ -62,6 +83,47 @@ public class Controller {
             gameHasEnded = false;
             line.setVisible(false);
         });
+
+        button.setOnMouseEntered(mouseEvent -> {
+            button.setCursor(Cursor.HAND);
+        });
+
+        hyperlink.setOnMouseClicked(mouseEvent -> {
+            Desktop d = Desktop.getDesktop();
+            try {
+                d.browse(new URI("https://github.com/Dagmmar/Tic-Tac-Toe"));
+            } catch (IOException | URISyntaxException e) {
+                e.printStackTrace();
+            }
+        });
+
+        imageView.setOnMouseEntered(mouseEvent -> {
+            imageView.setCursor(Cursor.HAND);
+        });
+
+        imageView.setOnMouseClicked(mouseEvent -> {
+
+            Desktop d = Desktop.getDesktop();
+            try {
+                d.browse(new URI("https://github.com/Dagmmar/Tic-Tac-Toe"));
+            } catch (IOException | URISyntaxException e) {
+                e.printStackTrace();
+            }
+        });
+
+        info.setOnMouseEntered(mouseEvent -> {
+            info.setCursor(Cursor.HAND);
+        });
+
+        info.setOnMouseClicked(mouseEvent -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("How to play?");
+            alert.setHeaderText(null);
+            alert.setContentText("Left click for X, Right click for O");
+
+            alert.showAndWait();
+        });
+
     }
 
     @FXML
