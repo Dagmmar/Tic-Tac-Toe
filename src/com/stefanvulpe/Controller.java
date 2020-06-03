@@ -15,8 +15,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
-
-
 import java.util.ArrayList;
 
 public class Controller {

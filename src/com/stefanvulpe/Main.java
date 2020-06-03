@@ -15,7 +15,7 @@ public class Main extends Application {
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 800, 800));
 
-        Image icon = new Image("file:icon.png");
+        Image icon = new Image("file:src/icons/icon.png");
         primaryStage.getIcons().add(icon);
 
         primaryStage.setResizable(false);
