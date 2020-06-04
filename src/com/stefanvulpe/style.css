@@ -1,10 +1,10 @@
-AnchorPane {
-    -fx-background-color: #3cbdc7;
-}
-
-GridPane {
+.gameBoard {
     -fx-background-color: #3cbdc7;
     -fx-padding: 20;
+}
+
+.mainAnchorPane {
+    -fx-background-color: #3cbdc7;
 }
 
 .gameCell {

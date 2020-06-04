@@ -5,15 +5,19 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
@@ -43,6 +47,9 @@ public class Controller {
     private Button button;
 
     @FXML
+    private AnchorPane mainAnchorPane;
+
+    @FXML
     private GridPane gameBoard;
 
     @FXML
@@ -58,6 +65,9 @@ public class Controller {
     private ImageView imageView;
 
     @FXML
+    private ImageView infoImageView;
+
+    @FXML
     private Label info;
 
     @FXML
@@ -66,9 +76,7 @@ public class Controller {
 
         line.setVisible(false);
 
-        gameBoard.setOnMouseEntered(mouseEvent -> {
-            gameBoard.setCursor(Cursor.HAND);
-        });
+        gameBoard.setOnMouseEntered(mouseEvent -> gameBoard.setCursor(Cursor.HAND));
 
         button.setOnMouseClicked(mouseEvent -> {
             ObservableList<Node> panes = gameBoard.getChildren();
@@ -84,9 +92,7 @@ public class Controller {
             line.setVisible(false);
         });
 
-        button.setOnMouseEntered(mouseEvent -> {
-            button.setCursor(Cursor.HAND);
-        });
+        button.setOnMouseEntered(mouseEvent -> button.setCursor(Cursor.HAND));
 
         hyperlink.setOnMouseClicked(mouseEvent -> {
             Desktop d = Desktop.getDesktop();
@@ -97,9 +103,7 @@ public class Controller {
             }
         });
 
-        imageView.setOnMouseEntered(mouseEvent -> {
-            imageView.setCursor(Cursor.HAND);
-        });
+        imageView.setOnMouseEntered(mouseEvent -> imageView.setCursor(Cursor.HAND));
 
         imageView.setOnMouseClicked(mouseEvent -> {
 
@@ -111,17 +115,41 @@ public class Controller {
             }
         });
 
-        info.setOnMouseEntered(mouseEvent -> {
-            info.setCursor(Cursor.HAND);
-        });
+        info.setOnMouseEntered(mouseEvent -> info.setCursor(Cursor.HAND));
 
         info.setOnMouseClicked(mouseEvent -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("How to play?");
-            alert.setHeaderText(null);
-            alert.setContentText("Left click for X, Right click for O");
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.initOwner(mainAnchorPane.getScene().getWindow());
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("dialog.fxml"));
+                dialog.getDialogPane().setContent(root);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-            alert.showAndWait();
+            dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+            dialog.setTitle("How to Play");
+
+            dialog.show();
+
+        });
+
+        infoImageView.setOnMouseEntered(mouseEvent -> infoImageView.setCursor(Cursor.HAND));
+
+        infoImageView.setOnMouseClicked(mouseEvent -> {
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.initOwner(mainAnchorPane.getScene().getWindow());
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("dialog.fxml"));
+                dialog.getDialogPane().setContent(root);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+            dialog.setTitle("How to Play");
+
+            dialog.show();
         });
 
     }
@@ -325,6 +353,7 @@ public class Controller {
         timeline.play();
 
     }
+
 
 //    @FXML
 //    private void displayPosition(MouseEvent event) {
