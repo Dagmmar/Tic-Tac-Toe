@@ -99,7 +99,7 @@ public class Controller {
             try {
                 d.browse(new URI("https://github.com/Dagmmar/Tic-Tac-Toe"));
             } catch (IOException | URISyntaxException e) {
-                e.printStackTrace();
+                endGameMessage.setText("Sorry, an error has occurred");
             }
         });
 
@@ -111,7 +111,7 @@ public class Controller {
             try {
                 d.browse(new URI("https://github.com/Dagmmar/Tic-Tac-Toe"));
             } catch (IOException | URISyntaxException e) {
-                e.printStackTrace();
+                endGameMessage.setText("Sorry, an error has occurred");
             }
         });
 
